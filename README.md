@@ -1,6 +1,6 @@
 # musicstoreapi-test-task
 
-Musicstore asyncronous example based on Python 3.6, aiohttp and asyncpg.
+Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 
 ## **Requirements**
 
@@ -111,7 +111,7 @@ DELETE /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
 ## Tracks
 
-### Get all user api_key
+### Get all user tracks using api_key
 
 #### Request POST
 
@@ -261,7 +261,7 @@ POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 }
 ```
 
-### Get all user albums by api_Key
+### Get all user albums by api_key
 
 ```http
 GET /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
