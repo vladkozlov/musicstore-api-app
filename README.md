@@ -45,13 +45,13 @@ Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 
 ### User information request
 
-#### Request
+#### Request GET
 
 ```http
 GET /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
-#### JSON response
+#### Response
 
 ```json
 {
@@ -113,7 +113,7 @@ DELETE /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
 ### Get all user tracks using api_key
 
-#### Request POST
+#### Request GET
 
 ```http
 GET /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
@@ -174,7 +174,7 @@ POST /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&albu
 
 ### Delete track from user lib
 
-#### Request POST
+#### Request DELETE
 
 ```http
 DELETE /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
@@ -198,7 +198,7 @@ DELETE /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
 
 ### Update track in user lib
 
-#### Request POST
+#### Request PUT
 
 ```http
 PUT /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Track&album_id=2
@@ -224,6 +224,8 @@ PUT /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Tr
 
 ### Create album
 
+#### Request POST
+
 ```http
 POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
@@ -246,7 +248,6 @@ POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
 #### Response success
 
-
 ```json
 {
     "status": true
@@ -263,12 +264,13 @@ POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
 ### Get all user albums by api_key
 
+#### Request GET
+
 ```http
 GET /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
 #### Response success
-
 
 ```json
 [
