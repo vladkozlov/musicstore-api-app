@@ -48,7 +48,7 @@ Musicstore asyncronous example based on Python 3.6, aiohttp and asyncpg.
 #### Request
 
 ```http
-GET users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
 #### JSON response
@@ -66,7 +66,7 @@ GET users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request POST
 
 ```http
-POST users?email=email@email.com&first_name=Name&last_name=Surname
+POST /users?email=email@email.com&first_name=Name&last_name=Surname
 ```
 
 #### Response success
@@ -90,7 +90,7 @@ POST users?email=email@email.com&first_name=Name&last_name=Surname
 #### Request DELETE
 
 ```http
-DELETE users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+DELETE /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
 #### Response success
@@ -116,7 +116,7 @@ DELETE users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request POST
 
 ```http
-GET tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
 #### Response success
@@ -153,7 +153,7 @@ GET tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request POST
 
 ```http
-POST tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&album_id=1
+POST /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&album_id=1
 ```
 
 #### Response success
@@ -177,7 +177,7 @@ POST tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&album
 #### Request POST
 
 ```http
-DELETE tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
+DELETE /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
 ```
 
 #### Response success
@@ -201,7 +201,7 @@ DELETE tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
 #### Request POST
 
 ```http
-PUT tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Track&album_id=2
+PUT /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Track&album_id=2
 ```
 
 #### Response success
@@ -225,7 +225,7 @@ PUT tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Tra
 ### Create album
 
 ```http
-POST albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 
 &name=My new album
 &metadata={
@@ -264,7 +264,7 @@ POST albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ### Get all user albums by api_Key
 
 ```http
-GET albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 ```
 
 #### Response success
