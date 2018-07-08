@@ -42,7 +42,7 @@ async def setup_db(dsn_url):
             updated timestamp not null DEFAULT now()
         );
         
-        CREATE OR REPLACE FUNCTION update_column_timestamp()   
+        CREATE OR REPLACE FUNCTION update_columns()   
         RETURNS TRIGGER AS $$
         BEGIN
             NEW.updated = now();
@@ -52,7 +52,7 @@ async def setup_db(dsn_url):
 
         CREATE TRIGGER update_album_timestamp
         BEFORE UPDATE ON albums 
-        FOR EACH ROW EXECUTE PROCEDURE update_column_timestamp();
+        FOR EACH ROW EXECUTE PROCEDURE update_album_timestamp();
     ''')
 
     # creating tracks
@@ -64,6 +64,18 @@ async def setup_db(dsn_url):
             created timestamp not null DEFAULT now(),
             updated timestamp not null DEFAULT now()
         )
+
+        CREATE OR REPLACE FUNCTION update_columns()   
+        RETURNS TRIGGER AS $$
+        BEGIN
+            NEW.updated = now();
+            RETURN NEW;   
+        END;
+        $$ language 'plpgsql';
+
+        CREATE TRIGGER update_tracks_timestamp
+        BEFORE UPDATE ON tracks
+        FOR EACH ROW EXECUTE PROCEDURE update_tracks_timestamp();
     ''')
     
     await conn.close()
