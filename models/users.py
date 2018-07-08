@@ -84,7 +84,7 @@ async def validate_api_key(request):
     try:
         api_key = UUID(query['api_key'], version=4)
     except ValueError:
-        return (False, {"err": "Mailformed api_key"})
+        return (False, {"err": "Mailformed api_key"}, None)
     
 
     async with(request.app['db'].acquire()) as conn:
@@ -95,7 +95,7 @@ async def validate_api_key(request):
                 WHERE api_key=$1
             ''', api_key)
 
-            if result == None: 
+            if not result: 
                 return (False, {"err":"no such api key"}, None)
             
             if (result['is_active'] == False):
