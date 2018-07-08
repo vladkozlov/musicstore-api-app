@@ -71,7 +71,7 @@ async def delete_handler(request):
                 WHERE api_key=$1
             ''', api_key)
             return Response(status=200, body=json.dumps({
-                    'status': 'ok'
+                    'status': True
                 }), content_type='application/json')
 
 

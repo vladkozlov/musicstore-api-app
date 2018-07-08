@@ -78,7 +78,7 @@ async def post_handler(request):
             return Response(
                 status=200,
                 body=json.dumps({
-                    "status": "ok"
+                    "status": True
                 }),
                 content_type="application/json"
             ) 
@@ -128,7 +128,7 @@ async def delete_handler(request):
             return Response(
                 status=200,
                 body = json.dumps({
-                    "status": "ok"
+                    "status": True
                 }),
                 content_type='application/json'
             )
@@ -195,7 +195,7 @@ async def put_handler(request):
             return Response(
                 status=200,
                 body=json.dumps({
-                    "status":"ok"
+                    "status":True
                 }),
                 content_type='application/json'
             )
