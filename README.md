@@ -1,4 +1,4 @@
-# musicstoreapi-api-app
+# musicstore-api-app
 
 Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 
