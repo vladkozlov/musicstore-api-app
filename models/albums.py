@@ -11,6 +11,10 @@ async def get_handler(request):
             body = json.dumps(result),
             content_type='application/json'
         )
+    
+    album_id = None
+    if "id" in request.match_info:
+        album_id = int(request.match_info['id'])
 
     async with ( request.app['db'].acquire() ) as conn:
         async with conn.transaction():
@@ -21,11 +25,19 @@ async def get_handler(request):
                 schema='pg_catalog'
             )
 
-            results = await conn.fetch('''
-                SELECT id, name, metadata::json, created, updated
-                FROM albums
-                WHERE user_id = $1;
-            ''', user_id)
+            if not album_id:
+                results = await conn.fetch('''
+                    SELECT id, name, metadata::json, created, updated
+                    FROM albums
+                    WHERE user_id = $1;
+                ''', user_id)
+            else:
+                results = await conn.fetch('''
+                    SELECT id, name, metadata::json, created, updated
+                    FROM albums
+                    WHERE user_id=&1 AND id=$2
+                ''', user_id, album_id)
+
             result_arr = []
             for row in results:
                 result_arr.append({
@@ -94,14 +106,18 @@ async def delete_handler(request):
     
     query = request.rel_url.query
     if not 'id' in query:
-        return Response(
-            status=200,
-            body= json.dumps({
-                "err": "No album id provided"
-            }),
-            content_type='application/json'
-        )
-    album_id = int(query['id'])
+        if not 'id' in request.match_info:
+            return Response(
+                status=200,
+                body= json.dumps({
+                    "err": "No album id provided"
+                }),
+                content_type='application/json'
+            )
+        else:
+            album_id = int(request.match_info['id'])
+    else:
+        album_id = int(query['id'])
     
     async with (request.app['db'].acquire()) as conn:
         async with conn.transaction():
@@ -143,14 +159,18 @@ async def put_handler(request):
         )
     query = request.rel_url.query
     if not 'id' in query:
-        return Response(
-            status=200,
-            body=json.dumps({
-                "err": "No album id provided."
-            }),
-            content_type='application/json'
-        )
-    album_id = int(query['id'])
+        if not 'id' in request.match_info:
+            return Response(
+                status=200,
+                body=json.dumps({
+                    "err": "No album id provided."
+                }),
+                content_type='application/json'
+            )
+        else:
+            album_id = int(request.match_info['id'])
+    else:
+        album_id = int(query['id'])
 
     async with(request.app['db'].acquire()) as conn:
         async with conn.transaction():

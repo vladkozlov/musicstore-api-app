@@ -11,16 +11,30 @@ async def get_handler(request):
             content_type= 'application/json'
         )
     
+    track_id = None
+    if "id" in request.match_info:
+        track_id = int(request.match_info['id'])
+
     async with ( request.app['db'].acquire() ) as conn:
         async with conn.transaction():
-            results = await conn.fetch('''
-                SELECT id as trck_id, name, album_id, created, updated
-                FROM tracks, 
-                    (SELECT id as albm_id
-                    FROM albums
-                    WHERE user_id=$1) as A
-                WHERE album_id = a.albm_id
-            ''', user_id)
+            if not track_id:
+                results = await conn.fetch('''
+                    SELECT id as trck_id, name, album_id, created, updated
+                    FROM tracks, 
+                        (SELECT id as albm_id
+                        FROM albums
+                        WHERE user_id=$1) as A
+                    WHERE album_id = a.albm_id
+                ''', user_id)
+            else :
+                results = await conn.fetch('''
+                    SELECT id as trck_id, name, album_id, created, updated
+                    FROM tracks, 
+                        (SELECT id as albm_id
+                        FROM albums
+                        WHERE user_id=$1) as A
+                    WHERE album_id = a.albm_id AND id=$2
+                ''', user_id, track_id)
             
             result_arr = []
             for row in results:
@@ -92,12 +106,16 @@ async def delete_handler(request):
     query = request.rel_url.query
 
     if not 'id' in query:
-        return Response(
-            status=200,
-            body=json.dumps({"err":"No track id provided to delete."}), 
-            content_type='application/json'
-        )
-    track_id = int(query['id'])
+        if not 'id' in request.match_info:
+            return Response(
+                status=200,
+                body=json.dumps({"err":"No track id provided to delete."}), 
+                content_type='application/json'
+            )
+        else:
+            track_id = int(request.match_info['id'])
+    else:
+        track_id = int(query['id'])
 
     async with (request.app['db'].acquire()) as conn:
         async with conn.transaction():
@@ -139,12 +157,16 @@ async def put_handler(request):
     query = request.rel_url.query
 
     if not 'id' in query:
-        return Response(
-            status=200,
-            body=json.dumps({"err":"No track id provided to edit."}), 
-            content_type='application/json'
-        )
-    track_id = int(query['id'])
+        if not 'id' in request.match_info:
+            return Response(
+                status=200,
+                body=json.dumps({"err":"No track id provided to edit."}), 
+                content_type='application/json'
+            )
+        else:
+            track_id = int(request.match_info['id'])
+    else:
+        track_id = int(query['id'])
     
     async with (request.app['db'].acquire()) as conn:
         async with conn.transaction():

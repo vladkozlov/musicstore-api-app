@@ -4,7 +4,7 @@ import sys
 from aiohttp import web
 
 from db import init_db
-from route import setup_routes
+from routes import setup_routes
 from settings import APP_CFG, DB_CFG, get_config
 
 
