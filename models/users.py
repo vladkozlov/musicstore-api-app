@@ -79,7 +79,7 @@ async def validate_api_key(request):
     query = request.rel_url.query
 
     if not 'api_key' in query:
-        return (False, {"err":"no api key"}, None)
+        return (False, {"err":"no api key specified"}, None)
 
     try:
         api_key = UUID(query['api_key'], version=4)
