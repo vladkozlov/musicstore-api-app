@@ -23,6 +23,8 @@ Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 
 ## Api key validation
 
+API key should be in HEAD as a key "x-api-key" and uuid api key value.
+
 ### Key is valid
 
 ```json
@@ -48,7 +50,8 @@ Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 #### Request GET
 
 ```http
-GET /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /user
 ```
 
 #### Response
@@ -66,7 +69,7 @@ GET /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request POST
 
 ```http
-POST /users?email=email@email.com&first_name=Name&last_name=Surname
+POST /user?email=email@email.com&first_name=Name&last_name=Surname
 ```
 
 #### Response success
@@ -90,7 +93,8 @@ POST /users?email=email@email.com&first_name=Name&last_name=Surname
 #### Request DELETE
 
 ```http
-DELETE /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+DELETE /user
 ```
 
 #### Response success
@@ -116,7 +120,8 @@ DELETE /users?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request GET
 
 ```http
-GET /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /tracks
 ```
 
 #### Response success
@@ -153,7 +158,8 @@ GET /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request POST
 
 ```http
-POST /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&album_id=1
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+POST /tracks?name=My New Track&album_id=1
 ```
 
 #### Response success
@@ -177,7 +183,8 @@ POST /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&name=My New Track&albu
 #### Request DELETE
 
 ```http
-DELETE /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+DELETE /tracks?&id=1
 ```
 
 #### Response success
@@ -201,7 +208,8 @@ DELETE /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1
 #### Request PUT
 
 ```http
-PUT /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Track&album_id=2
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+PUT /tracks?id=1&name=My New New Track&album_id=2
 ```
 
 #### Response success
@@ -227,7 +235,8 @@ PUT /tracks?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb&id=1&name=My New New Tr
 #### Request POST
 
 ```http
-POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+POST /albums
 
 &name=My new album
 &metadata={
@@ -267,7 +276,8 @@ POST /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
 #### Request GET
 
 ```http
-GET /albums?api_key=296c7f23-cb66-4dad-bc99-36a0c796dabb
+header x-api-key:296c7f23-cb66-4dad-bc99-36a0c796dabb
+GET /album
 ```
 
 #### Response success
