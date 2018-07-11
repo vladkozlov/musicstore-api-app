@@ -23,7 +23,7 @@ Musicstore asynchronous example based on Python 3.6, aiohttp and asyncpg.
 
 ## Api key validation
 
-API key should be in HEAD as a key "x-api-key" and uuid api key value.
+API key should be in HEADER as a key "x-api-key" and uuid api key value.
 
 ### Key is valid
 
