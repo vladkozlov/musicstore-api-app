@@ -1,6 +1,6 @@
 import asyncio
 from aiohttp import web
-from . import responses
+from . import Response
 import json
 import asyncpg.exceptions
 from .users import validate_api_key

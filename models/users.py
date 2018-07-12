@@ -1,9 +1,10 @@
 import asyncio
 from aiohttp import web
-from . import responses
+from . import Response
 import json
 import asyncpg.exceptions
 from uuid import UUID
+import re
 
 user_routes = web.RouteTableDef()
 
@@ -23,6 +24,9 @@ class User(web.View):
             return Response.error("No email, or firstname, or lastname provided.")
 
         email = query['email']
+        if not validate_email(email):
+            return Response.error("email is not valid")
+
         first_name = query['first_name']
         last_name = query['last_name']
         
@@ -56,6 +60,12 @@ class User(web.View):
                 ''', api_key)
                 return Response.data(result)
 
+def validate_email(email_str):
+    EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+
+    if not EMAIL_REGEX.match(email_str):
+        return False
+    return True 
 
 async def validate_api_key(request):
     if not 'x-api-key' in request.headers:
